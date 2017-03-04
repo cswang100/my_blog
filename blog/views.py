@@ -15,10 +15,18 @@ def post_list(request):
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def post_detail(request, pk):
+#    if request.user.is_anonymous:
+#        return(redirect('login'))          
+    if not request.user.is_authenticated():
+        return(redirect('login'))     
     post = get_object_or_404(Post, pk=pk)
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_new(request):
+#    if request.user.is_anonymous:
+#        return(redirect('login'))     
+    if not request.user.is_authenticated():
+        return(redirect('login')) 
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -33,6 +41,10 @@ def post_new(request):
     return render(request, 'blog/post_new.html', {'form': form})	
  
 def post_edit(request, pk):
+#    if request.user.is_anonymous:
+#       return(redirect('login'))         
+    if not request.user.is_authenticated():
+        return(redirect('login')) 
     post = get_object_or_404(Post, pk=pk)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
