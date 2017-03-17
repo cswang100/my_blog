@@ -10,7 +10,8 @@
                   {% else %}
                     <h2>{{ post.title }}</a></h2>
                   {% endif %}
-                    <h5><span class="glyphicon glyphicon-time"></span> Posted by {{post.author.username}} on {{ post.published_date }}</h5>
+                    <h5><span class="glyphicon glyphicon-time"></span> Posted by {{post.author.username}} on {{ post.published_date }}<br/>
+                    <span class="glyphicon glyphicon-user"></span>  {{ post.visits }} visits</h5>
                     <p>{{ post.text|linebreaksbr }}</p>
                     <hr>
             {% endfor %}

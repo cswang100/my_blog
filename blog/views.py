@@ -20,6 +20,8 @@ def post_detail(request, pk):
     if not request.user.is_authenticated():
         return(redirect('login'))     
     post = get_object_or_404(Post, pk=pk)
+    post.visits += 1
+    post.save()
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_new(request):
